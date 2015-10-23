@@ -36,10 +36,18 @@ var question5 = makeQuestion("gluteus maximus", "vastus medialis", "rectus abdom
 
 var quizQuestions = [question1, question2, question3, question4, question5];
 
-console.log(quizQuestions[0]);
-console.log(quizQuestions[1]);
-console.log(quizQuestions[2]);
-console.log(quizQuestions[3]);
-console.log(quizQuestions[4]);
+// make sure the objects/array work correctly
+
+//console.log(quizQuestions[0]);
+//console.log(quizQuestions[1]);
+//console.log(quizQuestions[2]);
+//console.log(quizQuestions[3]);
+//console.log(quizQuestions[4]);
+
+// Map values from the first object to the DOM
+
+document.getElementById('1').value=quizQuestions[0].optionA;
+$('label[for=1]').html(" " + quizQuestions[0].optionA);
+
 
 });
