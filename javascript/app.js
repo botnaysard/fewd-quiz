@@ -1,42 +1,44 @@
 $(document).ready(function() {
 
-
-// create a factory function to create quiz items
-
-	function makeQuestion(optionA, optionB, optionC, optionD, rightAnswer) {
+	// create a factory function to create quiz items; not necessary but chosen for learning purposes
+	function makeQuestion(optionA, optionB, optionC, optionD, rightAnswer, qimage) {
 		var question = {};
 		question.optionA = optionA;
 		question.optionB = optionB;
 		question.optionC = optionC;
 		question.optionD = optionD;
 		question.rightAnswer = rightAnswer;
+		question.qimage = qimage;
 		question.printOptions = function(){
 			return this.optionA + "|" + this.optionB + "|" + this.optionC + "|" + this.optionD + "|" + this.rightAnswer
 		}
 		return question;
 	}
 
-// create quiz items
+	// create quiz items
+	var question1 = makeQuestion("biceps brachii", "deltoid", "triceps brachii", "latissimus dorsi", "latissimus dorsi", "lats.jpg");
+	var question2 = makeQuestion("abductor magnus", "vastus lateralis", "gluteus maximus", "triceps brachii", "gluteus maximus", "glutes.jpg");
+	var question3 = makeQuestion("deltoid", "serratus anterior", "biceps brachii", "trapezius", "trapezius", "traps.jpg");
+	var question4 = makeQuestion("biceps brachii", "pectoralis major", "deltoid", "rectus abdominis", "pectoralis major", "pecs.jpg")
+	var question5 = makeQuestion("gluteus maximus", "vastus medialis", "rectus abdominis", "pectoralis minor", "rectus abdominis", "abs.jpg");
 
-	var question1 = makeQuestion("biceps brachii", "deltoid", "triceps brachii", "latissimus dorsi", "latissimus dorsi");
-	var question2 = makeQuestion("abductor magnus", "vastus lateralis", "biceps brachii", "triceps brachii", "gluteus maximus");
-	var question3 = makeQuestion("deltoid", "serratus anterior", "biceps brachii", "trapezius", "trapezius");
-	var question4 = makeQuestion("biceps brachii", "pectoralis major", "deltoid", "rectus abdominis", "pectoralis major")
-	var question5 = makeQuestion("gluteus maximus", "vastus medialis", "rectus abdominis", "pectoralis minor", "rectus abdominis");
+	// place the objects into an array
+	quizQuestions = [question1, question2, question3, question4, question5];
+	// initialize loop counting variable
+	loopCounter = 0;
+	// load first question
+	loadQuestions();
+	if (loopCounter <= 5) {
+		console.log(loopCounter);
+		// determine which radio button is selected on form submit
+		getUserInput();
+	} else {
+		console.log("you're done");
+	}
 
-// place the objects into an array, so we can step through it later
+});
 
-	var quizQuestions = [question1, question2, question3, question4, question5];
-
-// initialize loop counting variable
-
-	var loopCounter = 0;
-
-// Map values from the first object to the radio buttons in the DOM; set correct answer variable
-
-
-function loadQuestions(){
-
+function loadQuestions() {
 // radio 1
 	document.getElementById('r1').value=quizQuestions[loopCounter].optionA;
 	$('label[for=r1]').html(" " + quizQuestions[loopCounter].optionA);
@@ -50,11 +52,13 @@ function loadQuestions(){
 	document.getElementById('r4').value=quizQuestions[loopCounter].optionD;
 	$('label[for=r4]').html(" " + quizQuestions[loopCounter].optionD);
 // correct answer variable
-	var solution = quizQuestions[loopCounter].rightAnswer; 
+	solution = quizQuestions[loopCounter].rightAnswer; 
+// load image
+	$('#image-box').html('<img src="images/' + quizQuestions[loopCounter].qimage + '">');
+	
 }
 
-// determine which radio button is selected on form submit
-
+function getUserInput() {
 	$('#quiz-form').submit(function(event){
 		event.preventDefault();
 		if (document.getElementById('r1').checked) {
@@ -72,10 +76,11 @@ function loadQuestions(){
 		} else {
 			console.log('sorry, that is not the ' + userAnswer + ' it is the ' + solution + '.');
 		}
+		loopCounter++;
+		// load next question
+		loadQuestions();
 	});
-
-});
-
+}
 
 //reset values for next question 
 
