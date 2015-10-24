@@ -8,7 +8,7 @@ body{
 	display: flex;
 	margin-right: auto;
 	margin-left: auto;
-	max-width: 1180px;
+	max-width: 1200px;
 }
 
 .column {
@@ -32,12 +32,12 @@ body{
 }
 
 .center-column {
-	max-width: auto;
+	width: 736px;
 	position: relative;
 }
 
 .right-column {
-	max-width: 250px;
+	max-width: 280px;
 }
 
 /* left column elements */
@@ -93,7 +93,7 @@ body{
 .possible-answers {
 	margin-left: auto;
 	margin-right: auto;
-	width: 140px;
+	width: 160px;
 }
 
 .answer-item {

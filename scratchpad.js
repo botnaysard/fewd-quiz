@@ -7,22 +7,3 @@
 // 6. Move on to the next question, and repeat until the quiz is done
 // 7. Provide the final score  
 
-
-// Create a factory function to create the quiz questions
-
-function makeQuestion(optionA, optionB, optionC, optionD, rightAnswer) {
-	var question = {};
-	question.optionA = optionA;
-	question.optionB = optionB;
-	question.optionC = optionC;
-	question.optionD = optionD;
-	question.rightAnswer = rightAnswer;
-	user.printOptions = function(){
-		return this.optionA + "|" + this.optionB + "|" + this.optionC + "|" + this.optionD + "|" + this.rightAnswer
-	}
-	return question;
-}
-
-var question1 = makeQuestion("biceps brachii", "deltoid", "triceps brachii", "latissimus dorsi", "latissimus dorsi")
-
-console.log(question1.printOptions());
