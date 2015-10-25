@@ -26,16 +26,12 @@ $(document).ready(function() {
 	quizQuestions = [question1, question2, question3, question4, question5];
 	// initialize loop counting variable
 	loopCounter = 0;
+	killSwitch = quizQuestions.length - 1;
+	stopQuiz = false;
+	numberCorrect = 0;
 	// load first question
-	loadQuestions();
-	if (loopCounter <= 5) {
-		console.log(loopCounter);
-		// determine which radio button is selected on form submit
-		getUserInput();
-	} else {
-		console.log("you're done");
-	}
-
+		loadQuestions();
+		quizTime();
 });
 
 function loadQuestions() {
@@ -58,35 +54,48 @@ function loadQuestions() {
 	
 }
 
-function getUserInput() {
-	$('#quiz-form').submit(function(event){
-		event.preventDefault();
-		if (document.getElementById('r1').checked) {
-			userAnswer = document.getElementById('r1').value;
-		} else if (document.getElementById('r2').checked) {
-			userAnswer = document.getElementById('r2').value;
-		} else if (document.getElementById('r3').checked) {
-			userAnswer = document.getElementById('r3').value;
-		} else {
-			userAnswer = document.getElementById('r4').value;
-		}
-		console.log(userAnswer);
-		if (userAnswer == solution) {
-			console.log('correct, that is the ' + solution + ' muscle.');
-		} else {
-			console.log('sorry, that is not the ' + userAnswer + ' it is the ' + solution + '.');
-		}
-		loopCounter++;
-		// load next question
-		loadQuestions();
-	});
+function quizTime() {
+	if (!stopQuiz){
+
+		$('form').submit(function(event){
+			event.preventDefault();
+				if (document.getElementById('r1').checked) {
+					userAnswer = document.getElementById('r1').value;
+				} else if (document.getElementById('r2').checked) {
+					userAnswer = document.getElementById('r2').value;
+				} else if (document.getElementById('r3').checked) {
+					userAnswer = document.getElementById('r3').value;
+				} else {
+					userAnswer = document.getElementById('r4').value;
+				}
+				
+				if (userAnswer == solution) {
+					alert('correct, that is the ' + solution + ' muscle.');
+					numberCorrect++;
+					$('#correct-counter').html(numberCorrect);
+				} else {
+					alert('sorry, that is not the ' + userAnswer + ' it is the ' + solution + '.');
+				}		
+			
+				if (loopCounter >= killSwitch) {
+					stopQuiz = true;
+					$('.possible-answers').html("");
+					$('.question').html("CONGRATULATIONS!</br> You have finished the quiz!</br>  Your score was: " + numberCorrect + "/" + quizQuestions.length + ".");
+				} else {
+					$('form').trigger("reset");
+					loopCounter++;
+					loadQuestions();
+					$('#counter').html(loopCounter + 1  + "/" + quizQuestions.length);
+				}
+		
+		});
+
+	}
+
+
+	 
 }
 
-//reset values for next question 
-
-//function nextQuestion() {
-//	loopCounter++;
-//}
 
 
 

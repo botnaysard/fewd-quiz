@@ -5,6 +5,7 @@
 	<title>Muscular Anatomy Quiz</title>
 	<link rel="stylesheet" href="styles/normalize.css"/>
 	<link rel="stylesheet" href="styles/style.css"/>
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="javascript/jquery.min.js"></script>
 	<script type="text/javascript" src="javascript/math.min.js"></script>
 	<script type="text/javascript" src="javascript/app.js"></script>
@@ -17,11 +18,11 @@
 		<div class="column left-column">			
 			<div class="counter-box">
 				<div class="counter-box-title">Question:</div>
-				<div class="counter">X/X</div>
+				<div id="counter">1/5</div>
 			</div>
 			<div class="correct-count-box">
-				<div class="correct-topß-text">Correct answers so far:</div>
-				<div class="correct-counter">X</div>
+				<div class="correct-top-text">Correct answers so far:</div>
+				<div id="correct-counter">0</div>
 			</div>
 		</div>
 		<div class="column center-column">
@@ -36,7 +37,7 @@
 						<input class="answer-item" type="radio" name="option" id="r2" value="" /><label for="r2" ></label></br>
 						<input class="answer-item" type="radio" name="option" id="r3" value="" /><label for="r3" ></label></br>
 						<input class="answer-item" type="radio" name="option" id="r4" value="" /><label for="r4" ></label></br>
-						<div class="input-button">
+						<div id="input-button">
 							<input type="submit" value="submit"> 
 						</div>
 					</form>
